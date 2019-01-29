@@ -3,7 +3,6 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 
-
 const app = express();
 
 //este codigo conenta a la base de datos
@@ -25,10 +24,8 @@ app.use(express.static("public"));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //middlewares
-app.use(express.json());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
-
 
 //routes
 app.use('/', indexRoutes);
