@@ -33,14 +33,13 @@ router.post('/addUser', (req, res) => {
         'Content-type' : "application/json"
       }
     };
-    console.log(esto);
     fetch('http://192.168.43.107:3000/addUser',esto)
     .then(res => res.json())
     .catch(error => console.error('Error:', error))
     .then(data => {
-      console.log(data)
+      console.log(data.msn)
     }),
-    res.send(esto);
+    res.redirect('/userlist');
 
   }else {
     console.log("las contraceñas no son iguales");
