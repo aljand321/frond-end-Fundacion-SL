@@ -12,7 +12,7 @@ router.get('/regUSer', (req, res) => {
    res.render('regUSer');
 });
 
-
+// este servicio sirve para añadir usarios
 router.post('/addUser', (req, res) => {
   var regU = {
     nombre: req.body.nombre,
@@ -47,7 +47,7 @@ router.post('/addUser', (req, res) => {
     res.send("las contraceñas no son iguales");
   }
 });
-
+// este servicio sirve para mostrar todos los usarios
 router.get('/userlist',(req, res, next)=>{
 
     fetch('http://192.168.43.107:3000/usersGET')
@@ -59,7 +59,7 @@ router.get('/userlist',(req, res, next)=>{
         });
     });
 });
-
+// este servicio sirve para cambiar el estado de un usario
 router.get('/turn/:id',(req, res, next) => {
   var ruta =  req.url
   fetch('http://192.168.43.107:3000'+ruta)
@@ -72,6 +72,7 @@ router.get('/turn/:id',(req, res, next) => {
 
 });
 
+//Este servicio sirve para elminar un usario
 router.get('/delUser/:id', async (req, res) => {
   var delR = req.url;
   fetch('http://192.168.43.107:3000'+delR)
