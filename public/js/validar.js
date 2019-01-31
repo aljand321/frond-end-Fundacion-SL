@@ -12,12 +12,26 @@ $(document).ready(function() {
     }
 
   });
+  $("#email").keyup(function() {
+    var email = $('#email').val();
+        fetch('http://localhost:4000/listaUser')
+          .then(res => res.json())
+          .then(data =>{
+            const resultado = data.find( traer => traer.email === email );
+            console.log(resultado);
+            if(resultado != null){
+              $('#error3').text("ya Existe!").css("color","red");
+            }else{
+              $('#error3').text("puede continuar").css("color","green");
+            }
+        })
+  });
 
 });
 
 
 function validar() {
-  var celular, expresion;
+  var celular;
   celular = document.getElementById("celular").value;
 
   if (celular === ""){

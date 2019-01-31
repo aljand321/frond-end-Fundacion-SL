@@ -25,7 +25,9 @@
 
     <input type="text" id="apeliidoP" name="apellidoP" placeholder="Apellido Paterno" class="input-48" >
     <input type="text" id="apeliidoM" name="apellidoM" placeholder="Apellido Materno" class="input-48" >
+      <span id="error3"></span>
     <input type="email" id="email" name="email" placeholder="Correo Electronico" class="input-100" >
+
     <!-- <input type="text" id="idUser" name="idUser" placeholder="ID de Usario" class="input-100" required> -->
     <input type="password" id="clave" name="clave" placeholder="Contraceña" class="input-48" >
     <input type="password" id="clave2" name="clave2" placeholder="Repita la Contraceña" class="input-48" >
@@ -40,6 +42,35 @@
   </div>
 
 </form>
+
+<!-- <div class="container my-5 text-center">
+  <button class="btn btn-danger w-100" onclick="traer()">Obtener</button>
+  <div class="mt-5" id="contenido">
+
+
+  </div>
+
+</div> -->
+
+<!-- este scrip sireve para obtener todos los usuarios y verificar si existen o no
+<script>
+var contenido = document.querySelector('#contenido')
+  function traer(){
+    fetch('http://localhost:4000/listaUser')
+      .then(res => res.json())
+      .then(data =>{
+        const resultado = data.find( traer => traer.nombre === 'Jessica' );
+        console.log(resultado);
+        if(resultado != null){
+          console.log("existe")
+          contenido.innerHTML = `<p>ya existe</p>`
+        }else{
+          console.log("no existe")
+          contenido.innerHTML = ` <p>puede continuar</p> `
+        }
+    })
+  }
+</script> -->
 
   <i class="fas fa-ellipsis-v btn-menu"></i>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

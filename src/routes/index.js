@@ -13,6 +13,7 @@ router.get('/regUSer', (req, res) => {
 });
 
 // este servicio sirve para añadir usarios
+
 router.post('/addUser', (req, res) => {
   var regU = {
     nombre: req.body.nombre,
@@ -32,15 +33,22 @@ router.post('/addUser', (req, res) => {
       headers:{
         'Content-type' : "application/json"
       }
+
     };
     fetch('http://192.168.43.107:3000/addUser',esto)
     .then(res => res.json())
     .catch(error => console.error('Error:', error))
     .then(data => {
-      console.log(data.msn)
-    }),
-    res.redirect('/userlist');
+      console.log(data);
+      mensaje = data.msn;
+      if(mensaje == "enviado"){
+        res.redirect('/userlist');
+      }else {
+        res.send(mensaje);
+      }
 
+
+    })
   }else {
     console.log("las contraceñas no son iguales");
     res.send("las contraceñas no son iguales");
@@ -58,6 +66,15 @@ router.get('/userlist',(req, res, next)=>{
         });
     });
 });
+
+router.get('/listaUser',(req, res, next)=>{
+
+    fetch('http://192.168.43.107:3000/usersGET')
+    .then(resp => resp.json())
+    .then(resp =>{
+        res.status(200).json(resp);
+    });
+});
 // este servicio sirve para cambiar el estado de un usario
 router.get('/turn/:id',(req, res, next) => {
   var ruta =  req.url
@@ -72,7 +89,7 @@ router.get('/turn/:id',(req, res, next) => {
 });
 
 //Este servicio sirve para elminar un usario
-router.get('/delUser/:id', async (req, res) => {
+router.get('/delUser/:id', (req, res) => {
   var delR = req.url;
   fetch('http://192.168.43.107:3000'+delR)
   .then(resp => resp.json())
