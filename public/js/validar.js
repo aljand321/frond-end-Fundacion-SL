@@ -20,7 +20,7 @@ $(document).ready(function() {
             const resultado = data.find( traer => traer.email === email );
             console.log(resultado);
             if(resultado != null){
-              $('#error3').text("ya Existe!").css("color","red");
+              $('#error3').text("Ese email ya esta en uso. Prueba con otro").css("color","red");
             }else{
               $('#error3').text("puede continuar").css("color","green");
             }

@@ -1,15 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link rel="stylesheet" href="/stylesheets/estilos.css">
 </head>
 <body>
-
-  <td><a href="/regUSer"> Registrar usario </a></td>
-  <td> <a href="/userlist"> Mostrar Usuarios </a>  </td>
+  <div class="login-vice">
+		<img class="avatar" src="img/logo.jpg" alt="aljand"> <br><br><br><br>
+		<h1>Iniciar sesion</h1>
+		<form action="/login" method="post"> <br>
+			<!-- nombre de usario -->
+			<label for="username">Usario</label>
+			<input name="email" type="text" placeholder="id de Usuario" required autofocus > <br>
+			<!-- contraceña		 -->
+			<label for="contraceña">Contraceña</label>
+			<input name="clave" type="password"placeholder="Inserte su contraceña"> <br>
+			<input type="submit" value="Entrar">
+      <td><a href="/regUSer"> Registrar usario </a></td> <br/>
+      <td> <a href="/userlist"> Mostrar Usuarios </a>  </td>
+		</form>
+	</div>
 
 </body>
 </html>

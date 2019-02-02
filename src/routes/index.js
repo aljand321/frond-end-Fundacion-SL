@@ -13,7 +13,6 @@ router.get('/regUSer', (req, res) => {
 });
 
 // este servicio sirve para añadir usarios
-
 router.post('/addUser', (req, res) => {
   var regU = {
     nombre: req.body.nombre,
@@ -46,9 +45,8 @@ router.post('/addUser', (req, res) => {
       }else {
         res.send(mensaje);
       }
-
-
     })
+
   }else {
     console.log("las contraceñas no son iguales");
     res.send("las contraceñas no son iguales");
@@ -98,6 +96,28 @@ router.get('/delUser/:id', (req, res) => {
       console.log(resp);
       res.redirect('/userlist');
   });
+});
+
+//login
+router.post('/login',(req, res) => {
+  var userL = {
+    email: req.body.email,
+    clave: req.body.clave
+  };
+  var loger={
+  method: 'POST',
+  body: JSON.stringify(userL),
+  headers:{
+    'Content-type' : "application/json"
+   }
+  };
+  fetch('http://localhost:3000/sessions', loger)
+  .then(res => res.json())
+  .catch(error => console.error('Error:', error))
+  .then(data => {
+    console.log(data);
+    res.send(data);
+  })
 });
 
 
