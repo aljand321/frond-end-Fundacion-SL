@@ -11,7 +11,10 @@ router.get('/', (req, res) => {
 router.get('/regUSer', (req, res) => {
    res.render('regUSer');
 });
-
+//mostrar login
+router.get('/log', (req, res) => {
+   res.render('login');
+});
 // este servicio sirve para añadir usarios
 router.post('/addUser', (req, res) => {
   var regU = {
@@ -116,7 +119,7 @@ router.post('/login',(req, res) => {
   .catch(error => console.error('Error:', error))
   .then(data => {
     console.log(data);
-    res.send(data);
+    res.redirect('/log');
   })
 });
 

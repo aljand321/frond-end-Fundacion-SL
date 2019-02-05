@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <link rel="stylesheet" href="/stylesheets/estilos.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Selecionar Docente y estudiante</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+	<link rel="stylesheet" href="/stylesheets/ventana2.css">
 </head>
 <body>
-  <div class="login-vice">
-		<img class="avatar" src="img/logo.jpg" alt="aljand"> <br><br><br><br>
-		<h1>Iniciar sesion</h1>
-		<form action="/login" method="post"> <br>
-			<!-- nombre de usario -->
-			<label for="username">Usario</label>
-			<input name="email" type="text" placeholder="id de Usuario" required autofocus > <br>
-			<!-- contraceña		 -->
-			<label for="contraceña">Contraceña</label>
-			<input name="clave" type="password"placeholder="Inserte su contraceña"> <br>
-			<input type="submit" value="Entrar">
-      <td><a href="/regUSer"> Registrar usario </a></td> <br/>
-      <td> <a href="/userlist"> Mostrar Usuarios </a>  </td>
-		</form>
+	<div class="logo logo_main">Sublime.</div>
+	<div class="sessions">
+		<li> <a href="/log">Iniciar Sesion</a> </li>
 	</div>
 
+	<div class="nav">
+		<div class="wrap">
+				<div class="logo logo_small">UATF</div>
+				<nav>
+					<ul>
+						<li><a href="/#">INICIO</a></li>
+						<li><a href="/#">Añadir Producto</a></li>
+
+
+					</ul>
+				</nav>
+		</div>
+	</div>
+
+<i class="fas fa-ellipsis-v btn-menu"></i>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="/js/script.js"></script>
 </body>
 </html>
