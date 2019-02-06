@@ -2,8 +2,14 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const request = require('request');
+
 
 const app = express();
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 //este codigo conenta a la base de datos
 mongoose.connect('mongodb://localhost/USer')

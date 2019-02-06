@@ -16,6 +16,7 @@ router.get('/log', (req, res) => {
    res.render('login');
 });
 // este servicio sirve para añadir usarios
+
 router.post('/addUser', (req, res) => {
   var regU = {
     nombre: req.body.nombre,
@@ -55,6 +56,7 @@ router.post('/addUser', (req, res) => {
     res.send("las contraceñas no son iguales");
   }
 });
+
 // este servicio sirve para mostrar todos los usarios
 router.get('/userlist',(req, res, next)=>{
 
@@ -122,6 +124,47 @@ router.post('/login',(req, res) => {
     res.redirect('/log');
   })
 });
+
+// //captcha
+// router.post('/reCAPTCHA', (req, res) => {
+//   var cap = {
+//     nombre: req.body.nombre,
+//     apellidoP: req.body.apellidoP,
+//     apellidoM: req.body.apellidoM,
+//     email: req.body.email,
+//     clave: req.body.clave,
+//     clave2: req.body.clave2,
+//     celular: req.body.celular,
+//     direccion: req.body.direccion,
+//     captcha: req.body.captcha
+//   };
+//   var enviarCaptcha = {
+//     method: 'POST',
+//     body: JSON.stringify(cap),
+//     headers:{
+//       'Content-type':'application/json'
+//      }
+//   };
+//   fetch('http://localhost:3000/reCAPTCHA',enviarCaptcha)
+//   .then((res) => res.json())
+//   .then((data) => {
+//     console.log(data);
+//     mensaje = data.msn;
+//     if(mensaje == "enviado"){
+//       res.status(200).json({
+//                 "msn" : data
+//               });
+//
+//     }else {
+//       res.status(200).json({
+//                 "msn" : data
+//               });
+//     }
+//     // res.status(200).json({
+//     //           "msn" : data
+//     //         });
+//   });
+// });
 
 
 

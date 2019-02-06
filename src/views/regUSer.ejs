@@ -10,13 +10,15 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 <link rel="stylesheet" href="/stylesheets/dis.css">
 
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
 </head>
 <body>
 
   <br><br><br>
 
 <h1>Formulario de Registro</h1>
-<form action="/addUser" method="post" class="form-registrer" onsubmit="return validar();">
+<form id="reCaptcha" action="/addUser" method="post" class="form-registrer" onsubmit="return validar();">
 
   <h2 class="form-titulo"> Crear tu Cuenta </h2>
   <div class="contenedor-inputs">
@@ -34,7 +36,9 @@
     <span id="error2"></span>
     <input type="text" id="celular" name="celular" placeholder="Telefono" class="input-100" >
     <input type="text" id="direccion" name="direccion" placeholder="Direccion" class="input-100" >
-
+    <div class="form-group">
+        <div class="g-recaptcha" data-sitekey="6LdxcI8UAAAAANEc3nAaTTbMcJI1Fe-0DeNsasrD"></div>
+    </div>
     <input type="submit" value="Registrar Usuario" class="btn-enviar">
     <p class="form-link">¿Ya tienes una cuneta? <a href=""> Ingresa aqui </a></p>
 
@@ -42,6 +46,41 @@
   </div>
 
 </form>
+
+<script>
+
+document.getElementById('reCaptcha').addEventListener('submit', submitForm);
+  function submitForm(e){
+   // e.preventDefault();
+    const nombre = document.querySelector('#nombre').value;
+    const apellidoP = document.querySelector('#apeliidoP').value;
+    const apellidoM = document.querySelector('#apeliidoM').value;
+    const email = document.querySelector('#email').value;
+    const clave = document.querySelector('#clave').value;
+    const clave2 = document.querySelector('#clave2').value;
+    const celular = document.querySelector('#celular').value;
+    const direccion = document.querySelector('#direccion').value;
+    const captcha = document.querySelector('#g-recaptcha-response').value;
+
+    fetch('http://localhost:3000/reCAPTCHA', {
+      method:'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-type':'application/json'
+      },
+      body:JSON.stringify({nombre:nombre, apellidoP: apellidoP, apellidoM: apellidoM, email:email, clave:clave, clave2:clave2, celular:celular, direccion:direccion, captcha: captcha})
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      if(data.msg == "Please select captcha"){
+        alert(data.msg);
+      }else{
+        console.log(data);
+      }
+
+    });
+  }
+</script>
 
 <!-- <div class="container my-5 text-center">
   <button class="btn btn-danger w-100" onclick="traer()">Obtener</button>
