@@ -18,7 +18,7 @@
   <br><br><br>
 
 <h1>Formulario de Registro</h1>
-<form id="reCaptcha" action="/addUser" method="post" class="form-registrer" onsubmit="return validar();">
+<form id="reCaptcha" action="/reCapcha1" method="post" class="form-registrer" onsubmit="return validar();">
 
   <h2 class="form-titulo"> Crear tu Cuenta </h2>
   <div class="contenedor-inputs">
@@ -31,16 +31,17 @@
     <input type="email" id="email" name="email" placeholder="Correo Electronico" class="input-100" >
 
     <!-- <input type="text" id="idUser" name="idUser" placeholder="ID de Usario" class="input-100" required> -->
-    <input type="password" id="clave" name="clave" placeholder="Contraceña" class="input-48" >
-    <input type="password" id="clave2" name="clave2" placeholder="Repita la Contraceña" class="input-48" >
+    <input type="password" id="clave" name="clave" placeholder="Contraseña" class="input-48" required>
+    <input type="password" id="clave2" name="clave2" placeholder="Repita la Contraseña" class="input-48" required>
     <span id="error2"></span>
     <input type="text" id="celular" name="celular" placeholder="Telefono" class="input-100" >
     <input type="text" id="direccion" name="direccion" placeholder="Direccion" class="input-100" >
     <div class="form-group">
         <div class="g-recaptcha" data-sitekey="6LdxcI8UAAAAANEc3nAaTTbMcJI1Fe-0DeNsasrD"></div>
+
     </div>
     <input type="submit" value="Registrar Usuario" class="btn-enviar">
-    <p class="form-link">¿Ya tienes una cuneta? <a href=""> Ingresa aqui </a></p>
+    <p class="form-link">¿Ya tienes una cuneta? <a href="/log"> Ingresa aqui </a></p>
 
 
   </div>
@@ -51,7 +52,7 @@
 
 document.getElementById('reCaptcha').addEventListener('submit', submitForm);
   function submitForm(e){
-   // e.preventDefault();
+   e.preventDefault();
     const nombre = document.querySelector('#nombre').value;
     const apellidoP = document.querySelector('#apeliidoP').value;
     const apellidoM = document.querySelector('#apeliidoM').value;
@@ -62,7 +63,7 @@ document.getElementById('reCaptcha').addEventListener('submit', submitForm);
     const direccion = document.querySelector('#direccion').value;
     const captcha = document.querySelector('#g-recaptcha-response').value;
 
-    fetch('http://localhost:3000/reCAPTCHA', {
+    fetch('http://localhost:4000/reCAPTCHA', {
       method:'POST',
       headers: {
         'Accept': 'application/json, text/plain, */*',

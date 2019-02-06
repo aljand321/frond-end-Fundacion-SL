@@ -3,6 +3,10 @@ const router = express.Router();
 const fetch = require('node-fetch');
 var bodyParser = require('body-parser');
 
+var Recaptcha = require('express-recaptcha').Recaptcha;
+
+var recaptcha = new Recaptcha('6LdxcI8UAAAAANEc3nAaTTbMcJI1Fe-0DeNsasrD', '6LdxcI8UAAAAAJ-RuzN-uXXvvSLGlIoTOYJVQv_B');
+
 router.get('/', (req, res) => {
   res.render('index');
 });
@@ -15,8 +19,37 @@ router.get('/regUSer', (req, res) => {
 router.get('/log', (req, res) => {
    res.render('login');
 });
-// este servicio sirve para añadir usarios
+//prueva
 
+// router.post('/reCapcha1', (req, res) => {
+//   var captchaUser = {
+//     nombre: req.body.nombre,
+//     apellidoP: req.body.apellidoP,
+//     apellidoM: req.body.apellidoM,
+//     email: req.body.email,
+//     clave: req.body.clave,
+//     clave2: req.body.clave2,
+//     celular: req.body.celular,
+//     direccion: req.body.direccion
+//     //captcha: recaptcha.verify(req, function(error, data))
+//   };
+//   var esto={
+//   method: 'POST',
+//   body: JSON.stringify(captchaUser),
+//   headers:{
+//     'Content-type' : "application/json"
+//   }
+// };
+//   fetch('http://192.168.43.107:3000/reCAPTCHA1',esto)
+//   .then(res => res.json())
+//   .catch(error => console.error('Error:', error))
+//   .then(data => {
+//     console.log(data);
+//     res.send(data);
+//   })
+//
+// });
+// este servicio sirve para añadir usarios
 router.post('/addUser', (req, res) => {
   var regU = {
     nombre: req.body.nombre,
@@ -27,7 +60,6 @@ router.post('/addUser', (req, res) => {
     clave2: req.body.clave2,
     celular: req.body.celular,
     direccion: req.body.direccion
-
   };
   if(regU.clave == regU.clave2){
       var esto={
@@ -125,46 +157,46 @@ router.post('/login',(req, res) => {
   })
 });
 
-// //captcha
-// router.post('/reCAPTCHA', (req, res) => {
-//   var cap = {
-//     nombre: req.body.nombre,
-//     apellidoP: req.body.apellidoP,
-//     apellidoM: req.body.apellidoM,
-//     email: req.body.email,
-//     clave: req.body.clave,
-//     clave2: req.body.clave2,
-//     celular: req.body.celular,
-//     direccion: req.body.direccion,
-//     captcha: req.body.captcha
-//   };
-//   var enviarCaptcha = {
-//     method: 'POST',
-//     body: JSON.stringify(cap),
-//     headers:{
-//       'Content-type':'application/json'
-//      }
-//   };
-//   fetch('http://localhost:3000/reCAPTCHA',enviarCaptcha)
-//   .then((res) => res.json())
-//   .then((data) => {
-//     console.log(data);
-//     mensaje = data.msn;
-//     if(mensaje == "enviado"){
-//       res.status(200).json({
-//                 "msn" : data
-//               });
-//
-//     }else {
-//       res.status(200).json({
-//                 "msn" : data
-//               });
-//     }
-//     // res.status(200).json({
-//     //           "msn" : data
-//     //         });
-//   });
-// });
+//captcha
+router.post('/reCAPTCHA', (req, res) => {
+  var cap = {
+    nombre: req.body.nombre,
+    apellidoP: req.body.apellidoP,
+    apellidoM: req.body.apellidoM,
+    email: req.body.email,
+    clave: req.body.clave,
+    clave2: req.body.clave2,
+    celular: req.body.celular,
+    direccion: req.body.direccion,
+    captcha: req.body.captcha
+  };
+  var enviarCaptcha = {
+    method: 'POST',
+    body: JSON.stringify(cap),
+    headers:{
+      'Content-type':'application/json'
+     }
+  };
+  fetch('http://localhost:3000/reCAPTCHA',enviarCaptcha)
+  .then((res) => res.json())
+  .then((data) => {
+    console.log(data);
+    mensaje = data.msn;
+    if(mensaje == "enviado"){
+      res.status(200).json({
+                "msn" : data
+              });
+
+    }else {
+      res.status(200).json({
+                "msn" : data
+              });
+    }
+    // res.status(200).json({
+    //           "msn" : data
+    //         });
+  });
+});
 
 
 

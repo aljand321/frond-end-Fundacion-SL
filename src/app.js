@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const request = require('request');
-
+const Recaptcha = require('express-recaptcha').Recaptcha;
 
 const app = express();
 
@@ -32,6 +32,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 //middlewares
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 //routes
 app.use('/', indexRoutes);

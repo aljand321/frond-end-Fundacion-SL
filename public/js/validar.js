@@ -4,10 +4,10 @@ $(document).ready(function() {
     var clave2 = $('#clave2').val();
 
     if (clave == clave2) {
-      $('#error2').text("Las contraceñas coinciden!").css("color","green");
+      $('#error2').text("Las contraseñas coinciden!").css("color","green");
     }
     else{
-      $('#error2').text("Las contraceñas no Coinciden!").css("color","red");
+      $('#error2').text("Las contraseñas no Coinciden!").css("color","red");
 
     }
 
