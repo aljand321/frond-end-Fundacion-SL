@@ -30,8 +30,8 @@ router.get('/log', (req, res) => {
 //     clave: req.body.clave,
 //     clave2: req.body.clave2,
 //     celular: req.body.celular,
-//     direccion: req.body.direccion
-//     //captcha: recaptcha.verify(req, function(error, data))
+//     direccion: req.body.direccion,
+//     captcha: req.body['g-recaptcha-response']
 //   };
 //   var esto={
 //   method: 'POST',
@@ -40,7 +40,7 @@ router.get('/log', (req, res) => {
 //     'Content-type' : "application/json"
 //   }
 // };
-//   fetch('http://192.168.43.107:3000/reCAPTCHA1',esto)
+//   fetch('http://192.168.43.107:3000/reCAPTCHA',esto)
 //   .then(res => res.json())
 //   .catch(error => console.error('Error:', error))
 //   .then(data => {
@@ -49,7 +49,8 @@ router.get('/log', (req, res) => {
 //   })
 //
 // });
-// este servicio sirve para añadir usarios
+
+// este servicio sirve para añadir usarios y incluye captcha
 router.post('/addUser', (req, res) => {
   var regU = {
     nombre: req.body.nombre,
@@ -59,7 +60,8 @@ router.post('/addUser', (req, res) => {
     clave: req.body.clave,
     clave2: req.body.clave2,
     celular: req.body.celular,
-    direccion: req.body.direccion
+    direccion: req.body.direccion,
+    captcha: req.body['g-recaptcha-response']
   };
   if(regU.clave == regU.clave2){
       var esto={
@@ -70,7 +72,7 @@ router.post('/addUser', (req, res) => {
       }
 
     };
-    fetch('http://192.168.43.107:3000/addUser',esto)
+    fetch('http://localhost:3000/reCAPTCHA',esto)
     .then(res => res.json())
     .catch(error => console.error('Error:', error))
     .then(data => {
@@ -79,23 +81,24 @@ router.post('/addUser', (req, res) => {
       if(mensaje == "enviado"){
         res.redirect('/userlist');
       }else {
-        res.send(mensaje);
+        res.send(data);
       }
     })
 
   }else {
-    console.log("las contraceñas no son iguales");
-    res.send("las contraceñas no son iguales");
+    console.log("las contraseñas no son iguales");
+    res.send("las contraseñas no son iguales");
   }
 });
 
 // este servicio sirve para mostrar todos los usarios
 router.get('/userlist',(req, res, next)=>{
 
-    fetch('http://192.168.43.107:3000/usersGET')
+    fetch('http://localhost:3000/usersGET')
     .then(resp => resp.json())
     .then(resp =>{
         //console.log(resp)
+        console.log(recuperar);
         res.render('mostrarUser',{
           resp : resp
         });
@@ -104,7 +107,7 @@ router.get('/userlist',(req, res, next)=>{
 
 router.get('/listaUser',(req, res, next)=>{
 
-    fetch('http://192.168.43.107:3000/usersGET')
+    fetch('http://localhost:3000/usersGET')
     .then(resp => resp.json())
     .then(resp =>{
         res.status(200).json(resp);
@@ -113,7 +116,7 @@ router.get('/listaUser',(req, res, next)=>{
 // este servicio sirve para cambiar el estado de un usario
 router.get('/turn/:id',(req, res, next) => {
   var ruta =  req.url
-  fetch('http://192.168.43.107:3000'+ruta)
+  fetch('http://localhost:3000'+ruta)
   .then(resp => resp.json())
   .catch(error => console.error('Error:', error))
   .then(resp =>{
@@ -126,7 +129,7 @@ router.get('/turn/:id',(req, res, next) => {
 //Este servicio sirve para elminar un usario
 router.get('/delUser/:id', (req, res) => {
   var delR = req.url;
-  fetch('http://192.168.43.107:3000'+delR)
+  fetch('http://localhost:3000'+delR)
   .then(resp => resp.json())
   .catch(error => console.error('Error:', error))
   .then(resp =>{
@@ -156,46 +159,79 @@ router.post('/login',(req, res) => {
     res.redirect('/log');
   })
 });
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+router.get('/mostrarinsertar', (req, res) =>{
+  res.render('zinsertarP');
+});
 
-//captcha
-router.post('/reCAPTCHA', (req, res) => {
-  var cap = {
-    nombre: req.body.nombre,
-    apellidoP: req.body.apellidoP,
-    apellidoM: req.body.apellidoM,
-    email: req.body.email,
-    clave: req.body.clave,
-    clave2: req.body.clave2,
-    celular: req.body.celular,
-    direccion: req.body.direccion,
-    captcha: req.body.captcha
+//<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+var recuperar;
+router.get('/test',(req, res, next)=>{
+
+    fetch('http://localhost:3000/getP')
+    .then(resp => resp.json())
+    .then(resp =>{
+        //console.log(resp)
+        recuperar = resp;
+        console.log(recuperar);
+        res.send(resp);
+    });
+});
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>><
+router.post('/test', (req, res) => {
+  var test1 = {
+    name: req.body.name,
+    price: req.body.price,
+    description: req.body.description
   };
-  var enviarCaptcha = {
-    method: 'POST',
-    body: JSON.stringify(cap),
-    headers:{
-      'Content-type':'application/json'
-     }
-  };
-  fetch('http://localhost:3000/reCAPTCHA',enviarCaptcha)
-  .then((res) => res.json())
-  .then((data) => {
+  var esto={
+  method: 'POST',
+  body: JSON.stringify(test1),
+  headers:{
+    'Content-type' : "application/json"
+  }
+};
+  fetch('http://localhost:3000/addUser1',esto)
+  .then(res => res.json())
+  .catch(error => console.error('Error:', error))
+  .then(data => {
     console.log(data);
-    mensaje = data.msn;
-    if(mensaje == "enviado"){
-      res.status(200).json({
-                "msn" : data
-              });
+    res.redirect('/mostrarinsertar');
+  })
 
-    }else {
-      res.status(200).json({
-                "msn" : data
-              });
-    }
-    // res.status(200).json({
-    //           "msn" : data
-    //         });
-  });
+});
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+router.get('/mostrarPrueva', (req, res) =>{
+  res.render('enviar');
+});
+
+//rutas de envio
+router.post('/enviar',(req ,res) => {
+  console.log(recuperar);
+
+  for(var i=0; i < recuperar.length; i++){
+    var loger={
+    method: 'POST',
+    body: JSON.stringify(recuperar[i]),
+    headers:{
+      'Content-type' : "application/json"
+     }
+    };
+    fetch('http://localhost:3000/addUser2', loger)
+    .then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(data => {
+      if(error){
+        res.send(error);
+      }else{
+        console.log(data);
+        res.redirect('/mostrarPrueva');        
+      }
+    })
+  }
+
 });
 
 
