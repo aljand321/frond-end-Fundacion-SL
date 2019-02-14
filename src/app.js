@@ -5,8 +5,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const request = require('request');
 const Recaptcha = require('express-recaptcha').Recaptcha;
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
