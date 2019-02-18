@@ -13,7 +13,10 @@ router.get('/', (req, res) => {
 
 //servicio para cambiar de pestaña
 router.get('/regUSer', (req, res) => {
-   res.render('regUSer');
+   res.render('regUSer',{
+     data,
+     regU
+   });
 });
 //mostrar login
 router.get('/log', (req, res) => {
@@ -51,6 +54,7 @@ router.get('/log', (req, res) => {
 // });
 
 // este servicio sirve para añadir usarios y incluye captcha
+var data, regU;
 router.post('/addUser', (req, res) => {
   var regU = {
     nombre: req.body.nombre,
@@ -63,7 +67,7 @@ router.post('/addUser', (req, res) => {
     direccion: req.body.direccion,
     captcha: req.body['g-recaptcha-response']
   };
-  if(regU.clave == regU.clave2){
+  regU = regU;
       var esto={
       method: 'POST',
       body: JSON.stringify(regU),
@@ -81,14 +85,13 @@ router.post('/addUser', (req, res) => {
       if(mensaje == "enviado"){
         res.redirect('/userlist');
       }else {
-        res.send(data);
+        data = data.msn;
+        res.render('regUSer',{
+          data,
+          regU
+        });
       }
     })
-
-  }else {
-    console.log("las contraseñas no son iguales");
-    res.send("las contraseñas no son iguales");
-  }
 });
 
 // este servicio sirve para mostrar todos los usarios
@@ -227,7 +230,7 @@ router.post('/enviar',(req ,res) => {
         res.send(error);
       }else{
         console.log(data);
-        res.redirect('/mostrarPrueva');        
+        res.redirect('/mostrarPrueva');
       }
     })
   }

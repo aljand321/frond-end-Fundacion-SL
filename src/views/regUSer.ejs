@@ -18,32 +18,59 @@
   <br><br><br>
 
 <h1>Formulario de Registro</h1>
+
 <form id="reCaptcha" action="/addUser" method="post" class="form-registrer" onsubmit="return validar();">
 
   <h2 class="form-titulo"> Crear tu Cuenta </h2>
   <div class="contenedor-inputs">
+    <% if (data) {%>
 
-    <input type="text" id="nombre" name="nombre" placeholder="Nombres" class="input-100" >
+      <h3 style="color: red"> <%= data %> </h3>
 
-    <input type="text" id="apeliidoP" name="apellidoP" placeholder="Apellido Paterno" class="input-48" >
-    <input type="text" id="apeliidoM" name="apellidoM" placeholder="Apellido Materno" class="input-48" >
+      <% } %>
+
+<% if (regU) {%>
+
+    <input type="text" id="nombre" name="nombre" placeholder="Nombres" value="<%= regU.nombre%>" class="input-100">
+
+    <input type="text" id="apeliidoP" name="apellidoP" placeholder="Apellido Paterno" value="<%= regU.apellidoP%>" class="input-48" >
+    <input type="text" id="apeliidoM" name="apellidoM" placeholder="Apellido Materno" value="<%= regU.apellidoM%>" class="input-48" >
       <span id="error3"></span>
-    <input type="email" id="email" name="email" placeholder="Correo Electronico" class="input-100" >
+    <input type="email" id="email" name="email" placeholder="Correo Electronico" value="<%= regU.email%>" class="input-100" >
 
     <!-- <input type="text" id="idUser" name="idUser" placeholder="ID de Usario" class="input-100" required> -->
-    <input type="password" id="clave" name="clave" placeholder="Contraseña" class="input-48" required>
+    <input type="password" id="clave" name="clave" placeholder="Contraseña"  class="input-48" required>
     <input type="password" id="clave2" name="clave2" placeholder="Repita la Contraseña" class="input-48" required>
     <span id="error2"></span>
-    <input type="text" id="celular" name="celular" placeholder="Telefono" class="input-100" >
-    <input type="text" id="direccion" name="direccion" placeholder="Direccion" class="input-100" >
+    <input type="text" id="celular" name="celular" placeholder="Telefono" value="<%= regU.celular%>" class="input-100" >
+    <input type="text" id="direccion" name="direccion" placeholder="Direccion" value="<%= regU.direccion%>" class="input-100" >
     <div class="form-group">
         <div class="g-recaptcha" data-sitekey="6LdxcI8UAAAAANEc3nAaTTbMcJI1Fe-0DeNsasrD"></div>
 
     </div>
     <input type="submit" value="Registrar Usuario" class="btn-enviar">
     <p class="form-link">¿Ya tienes una cuneta? <a href="/log"> Ingresa aqui </a></p>
+    <% } else { %>
+      <input type="text" id="nombre" name="nombre" placeholder="Nombres"  class="input-100">
 
+      <input type="text" id="apeliidoP" name="apellidoP" placeholder="Apellido Paterno"  class="input-48" >
+      <input type="text" id="apeliidoM" name="apellidoM" placeholder="Apellido Materno"  class="input-48" >
+        <span id="error3"></span>
+      <input type="email" id="email" name="email" placeholder="Correo Electronico"  class="input-100" >
 
+      <!-- <input type="text" id="idUser" name="idUser" placeholder="ID de Usario" class="input-100" required> -->
+      <input type="password" id="clave" name="clave" placeholder="Contraseña"  class="input-48" required>
+      <input type="password" id="clave2" name="clave2" placeholder="Repita la Contraseña" class="input-48" required>
+      <span id="error2"></span>
+      <input type="text" id="celular" name="celular" placeholder="Telefono"  class="input-100" >
+      <input type="text" id="direccion" name="direccion" placeholder="Direccion" class="input-100" >
+      <div class="form-group">
+          <div class="g-recaptcha" data-sitekey="6LdxcI8UAAAAANEc3nAaTTbMcJI1Fe-0DeNsasrD"></div>
+
+      </div>
+      <input type="submit" value="Registrar Usuario" class="btn-enviar">
+      <p class="form-link">¿Ya tienes una cuneta? <a href="/log"> Ingresa aqui </a></p>
+      <%}%>
   </div>
 
 </form>
