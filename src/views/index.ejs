@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Selecionar Docente y estudiante</title>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 	<link rel="stylesheet" href="/stylesheets/ventana2.css">
 </head>
 <body>
@@ -20,12 +21,45 @@
 				<nav>
 					<ul>
 						<li><a href="/#">INICIO</a></li>
-						<li><a href="/#">Añadir Producto</a></li>
+						<li><a href="/mostrarinsertar">Añadir Producto</a></li>
 
 
 					</ul>
 				</nav>
 		</div>
+	</div>
+
+	<div class="tableUser">
+	  <table class="table">
+	    <thead>
+	      <tr>
+	        <th scope="col">#</th>
+	        <th scope="col">Producto</th>
+	        <th scope="col">Precio</th>
+	        <th scope="col">description</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+
+	        <% for(var i=0; i < resp.length; i++) { %>
+	        <tr>
+
+	          <td scope="row"><%= i + 1 %></td>
+	          <td> <%=resp[i].name %></td>
+	          <td> <%=resp[i].price %> </td>
+	          <td> <%=resp[i].description %> </td>
+	          <td>
+	            <!-- <a href="/delUser/<%=resp[i]._id %>" class="btn btn-danger"> Delete </a> -->
+	            <!-- <a href="#" class="btn btn-info"> Edit </a> -->
+
+	          </td>
+
+	        </tr>
+	        <% } %>
+
+	    </tbody>
+	  </table>
+
 	</div>
 
 <i class="fas fa-ellipsis-v btn-menu"></i>

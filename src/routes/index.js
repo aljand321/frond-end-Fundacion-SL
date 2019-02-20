@@ -8,7 +8,14 @@ var Recaptcha = require('express-recaptcha').Recaptcha;
 var recaptcha = new Recaptcha('6LdxcI8UAAAAANEc3nAaTTbMcJI1Fe-0DeNsasrD', '6LdxcI8UAAAAAJ-RuzN-uXXvvSLGlIoTOYJVQv_B');
 
 router.get('/', (req, res) => {
-  res.render('index');
+  fetch('http://localhost:3000/getP')
+  .then(resp => resp.json())
+  .then(resp =>{
+      console.log(recuperar);
+      res.render('index',{
+        resp
+      });
+  });
 });
 
 //servicio para cambiar de pestaña
