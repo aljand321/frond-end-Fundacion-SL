@@ -11,7 +11,6 @@ router.get('/', (req, res) => {
   fetch('http://localhost:3000/getP')
   .then(resp => resp.json())
   .then(resp =>{
-      console.log(recuperar);
       res.render('index',{
         resp
       });
@@ -166,7 +165,7 @@ router.post('/login',(req, res) => {
   .catch(error => console.error('Error:', error))
   .then(data => {
     console.log(data);
-    res.redirect('/log');
+    res.send(data);
   })
 });
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
